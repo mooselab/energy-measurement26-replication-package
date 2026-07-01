@@ -1,0 +1,13 @@
+/* CTF 1.8 */
+typealias integer { size = 8; align = 8; signed = false; base = 10; } := uint8_t;
+typealias integer { size = 16; align = 8; signed = false; base = 10; } := uint16_t;
+typealias integer { size = 32; align = 8; signed = false; base = 10; } := uint32_t;
+typealias integer { size = 64; align = 8; signed = false; base = 10; } := uint64_t;
+typealias floating_point { align = 8; exp_dig = 8; mant_dig = 24; byte_order = le;} := float32_t;
+enum source_name : uint8_t {"unknown-" = 0...88, "EPS1" = 89, "EPS2" = 90, "unknown+" = 91...255,};
+env {domain = "PowerTracer25"; tracer = "PowerTracer25"; source_count = 16; source_names = "8:EPS1,9:EPS2";};
+trace { major = 1; minor = 8; byte_order = le; uuid = "2a6422d0-6cee-11e0-8c08-cb07d7b3a564"; packet.header := struct { uint32_t magic; uint8_t uuid[16]; uint32_t stream_id; }; };
+clock { name = hybrid_clock_1ghz; freq = 1000000000; precision = 1; description = "Hybrid clock generated from host timestamp adjusted with tcp roundtrip time"; absolute = FALSE; };
+typealias integer { size = 64; align = 8; signed = false; map = clock.hybrid_clock_1ghz.value; } := timestamp_t;
+stream { id = 0; event.header := struct { uint32_t id; timestamp_t timestamp; }; packet.context := struct { timestamp_t timestamp_begin; timestamp_t timestamp_end; uint64_t content_size; uint64_t packet_size; }; };
+event { name = Pwrsensor_event; id = 226; stream_id = 0; fields := struct { struct { enum source_name id; float32_t value; } sensors[14]; }; };
