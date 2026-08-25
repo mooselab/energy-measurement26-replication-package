@@ -1,0 +1,58 @@
+{
+  // ---------------------------------------------------------------------------
+  // Open THIS folder (replication-package) as the VS Code workspace. The paths
+  // below are relative to it.
+  //
+  // If the interpreter still does not attach, set it by hand once:
+  //   Ctrl+Shift+P -> "Python: Select Interpreter" -> .venv\Scripts\python.exe
+  // defaultInterpreterPath is only consulted when no interpreter has been
+  // chosen for the workspace yet, so a previously stored choice overrides it.
+  // ---------------------------------------------------------------------------
+
+  // NOTE: "python.defaultInterpreterPath" is deliberately NOT set here.
+  //
+  // It accepts neither "${workspaceFolder}/..." nor a relative path in current
+  // versions of the Python extension - both produce
+  //   Default interpreter path '...' could not be resolved
+  // and an absolute path cannot be committed because it differs per machine.
+  // It is also only consulted when no interpreter has been chosen yet, so it is
+  // a weak mechanism regardless.
+  //
+  // Select the interpreter once instead; VS Code remembers it per workspace:
+  //   Ctrl+Shift+P -> "Python: Select Interpreter" -> .venv\Scripts\python.exe
+  // The extension discovers ".venv" in the workspace root, so it appears in the
+  // list without any configuration.
+
+  // THE CRITICAL SETTING. Every data path in the notebooks is relative to the
+  // notebook's own directory (e.g. "../data/E2-arrowlake-instructions/rapl"),
+  // because that is how they were originally run. Jupyter must therefore start
+  // each kernel in the notebook's directory, not in the workspace root.
+  // Without this you get FileNotFoundError on the first parser cell.
+  "jupyter.notebookFileRoot": "${fileDirname}",
+
+  // Integrated terminals get the venv without needing "activate".
+  "python.terminal.activateEnvironment": true,
+
+  // These notebooks print large frames and produce big figures; keep more of it.
+  "notebook.output.textLineLimit": 60,
+  "notebook.output.scrolling": true,
+
+  // The notebooks ship with their original stored outputs, which are evidence of
+  // the published run. Do not let a save silently rewrite them.
+  "notebook.formatOnSave.enabled": false,
+
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.ipynb_checkpoints": true
+  },
+
+  // 156 MB of binary captures; excluding these keeps search and file-watching fast.
+  "search.exclude": {
+    ".venv": true,
+    "data": true
+  },
+  "files.watcherExclude": {
+    "**/.venv/**": true,
+    "**/data/**": true
+  }
+}

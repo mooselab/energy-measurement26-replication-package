@@ -1,0 +1,2 @@
+comparison,cpu,n,pearson_r,R2
+RAPL power vs Measured power,CoffeeLake,67093,0.8363,0.6994

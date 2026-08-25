@@ -1,0 +1,46 @@
+# Replication package - Python dependencies
+#
+# Verified on CPython 3.12.10 (Windows x86_64). These are the exact versions the
+# package was last executed against; see ENVIRONMENT.md for how to build the
+# environment and KNOWN_ISSUES.md for why the pandas bound matters.
+#
+#   python -m venv .venv
+#   .venv/Scripts/activate          # Windows;  source .venv/bin/activate on POSIX
+#   pip install -r requirements.txt
+#
+# or, with uv:
+#
+#   uv venv --python 3.12.10
+#   uv pip install -r requirements.txt
+
+# --- core analysis -----------------------------------------------------------
+# pandas MUST stay below 3.0. Two notebook cells call DataFrame.applymap (removed
+# in 3.0), and E1 source cell 3 writes a float into an int64 column, which 3.x
+# rejects outright. Both stop the notebooks; neither affects any result.
+# See KNOWN_ISSUES.md K10 and K11.
+pandas==2.3.3
+numpy==2.5.2
+scipy==1.18.0
+
+# --- figures -----------------------------------------------------------------
+matplotlib==3.11.1
+seaborn==0.13.2
+
+# --- statistics --------------------------------------------------------------
+# Dunn post-hoc test (RQ2)
+scikit-posthocs==0.14.0
+
+# --- notebook interface ------------------------------------------------------
+jupyter==1.1.1
+
+# --- R bridge, RQ2 only ------------------------------------------------------
+# Needed only for the Scott-Knott ESD cells. Requires a working R installation -
+# RStudio alone is NOT enough, it is only an IDE. Verified against R 4.6.1 with
+# ScottKnottESD 2.0.3, effsize 0.8.1, ggplot2 4.0.3, svglite 2.2.2:
+#
+#   winget install RProject.R                       # Windows
+#   Rscript -e "install.packages(c('ScottKnottESD','effsize','ggplot2','svglite'))"
+#
+# On Windows, set R_HOME and launch from PowerShell or cmd, NOT Git Bash - see
+# ENVIRONMENT.md for why. RQ1 and RQ3 do not use rpy2 at all.
+rpy2==3.6.7

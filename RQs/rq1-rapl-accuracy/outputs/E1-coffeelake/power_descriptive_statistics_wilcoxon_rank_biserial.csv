@@ -1,0 +1,11 @@
+W twotail,p twotail,rank biserial effectsize,me,mae,xname,yname,workload name,significance,effectsize word,direction
+2.0,0.0,0.8680239,9.935491,9.93553,cpu_total,power,int32,p < 0.001,Large,X is greater
+11.0,0.0,0.85126257,9.63895,9.639459,cpu_total,power,int64,p < 0.001,Large,X is greater
+11.0,0.0,0.8293592,9.529662,9.530251,cpu_total,power,int128,p < 0.001,Large,X is greater
+2.976461e+06,0.0,0.6823354,9.3959,14.108435,cpu_total,power,fp32,p < 0.001,Large,X is greater
+7738.0,0.0,0.8293965,9.234662,9.247957,cpu_total,power,fp64,p < 0.001,Large,X is greater
+2.0,0.0,0.9040326,13.184286,13.184462,cpu_total,power,MMX,p < 0.001,Large,X is greater
+13570.0,0.0,0.9121704,13.167576,13.191011,cpu_total,power,SSE,p < 0.001,Large,X is greater
+2.0,0.0,0.90811956,13.411701,13.411801,cpu_total,power,SSE2,p < 0.001,Large,X is greater
+627525.0,0.0,0.8756778,12.651976,14.043685,cpu_total,power,AVX,p < 0.001,Large,X is greater
+2.126722e+06,0.0,0.7816858,12.558041,17.460554,cpu_total,power,AVX2,p < 0.001,Large,X is greater

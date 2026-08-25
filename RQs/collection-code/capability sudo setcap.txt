@@ -1,0 +1,4 @@
+capability
+sudo setcap 'cap_sys_nice=eip' /home/horizon/Downloads/experiments/code/tcpBounce
+
+sudo setcap 'cap_sys_nice,cap_sys_rawio,cap_dac_override=eip' /home/horizon/Downloads/experiments/code/pollrapl
